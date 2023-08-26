@@ -4,11 +4,11 @@
 
 ## Неформальный анонс (классический)
 
-![](../img/anounce.svg)
+![](img/anounce.svg)
 
 ## Формальный
 
-![](../img/old-anounce.svg)
+![](img/old-anounce.svg)
 
 <style>
 	img {
