@@ -1,6 +1,9 @@
 [book]
 authors = ["sitandr"]
-language = "en"
+language = "ru"
 multilingual = false
 src = "src"
 title = "Курс по Rust 23/24"
+
+[build]
+build-dir = "docs"
