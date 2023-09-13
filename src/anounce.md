@@ -15,7 +15,3 @@
 		background: white;
 	}
 </style>
-
-## Альтернативный
-
-[https://t.me/postypashki_mems/146](https://t.me/postypashki_mems/146)
