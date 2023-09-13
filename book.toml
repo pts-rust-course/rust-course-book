@@ -3,7 +3,7 @@ authors = ["sitandr"]
 language = "ru"
 multilingual = false
 src = "src"
-title = "Курс по Rust 23/24"
+title = "Курс по Rust: Осень 2023"
 
 [build]
 build-dir = "docs"
