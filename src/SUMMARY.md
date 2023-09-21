@@ -10,7 +10,8 @@
 
 - [Материалы лекций](./materials.md)
 	+ [Вводная лекция](./lect/0-lect.md)
-	+ [Лекция №1]()
+	+ [Лекция №1](./lect/01-basic.md)
+	+ [Лекция №2]()
 
 - [ДЗ](./hw.md)
 	+ [Гайд по Github Classroom](hw/classroom.md)
