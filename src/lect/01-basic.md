@@ -2,4 +2,4 @@
 
 [Презентация](pres/01-basic.pdf)
 
-[Видео](): _coming soon_
+[Видео](https://youtu.be/Jr1G2hVM16o)

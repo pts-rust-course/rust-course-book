@@ -11,7 +11,7 @@
 - [Материалы лекций](./materials.md)
 	+ [Вводная лекция](./lect/0-lect.md)
 	+ [Лекция №1](./lect/01-basic.md)
-	+ [Лекция №2]()
+	+ [Лекция №2](./lect/02-structs.md)
 
 - [ДЗ](./hw.md)
 	+ [Гайд по Github Classroom](hw/classroom.md)
