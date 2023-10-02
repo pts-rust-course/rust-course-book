@@ -16,5 +16,5 @@
 - [ДЗ](./hw.md)
 	+ [Гайд по Github Classroom](hw/classroom.md)
 	+ [ДЗ №1](hw/01-hw.md)
-	+ [ДЗ №2]()
+	+ [ДЗ №2](hw/02-hw.md)
 	+ [ДЗ №3]()
