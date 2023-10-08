@@ -13,11 +13,11 @@
 	+ [Лекция №1](./lect/01-basic.md)
 	+ [Лекция №2](./lect/02-structs.md)
     + [Лекция №3](./lect/03-traits.md)
-    + [Лекция №4](./lect/04-dnd.md)
+    + [Лекция №4]()
 
 - [ДЗ](./hw.md)
 	+ [Гайд по Github Classroom](hw/classroom.md)
 	+ [ДЗ №1](hw/01-hw.md)
 	+ [ДЗ №2](hw/02-hw.md)
 	+ [ДЗ №3](hw/03-hw.md)
-	+ [ДЗ №4](hw/04-hw.md)
+	+ [ДЗ №4]()
