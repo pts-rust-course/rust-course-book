@@ -1,3 +1,3 @@
-Инструкция по настройке codespaces: https://don-rumata.notion.site/Github-CodeSpaces-c86fa452164d43a698a9325a5fc0b165?pvs=4
+[Инструкция по настройке codespaces](https://don-rumata.notion.site/Github-CodeSpaces-c86fa452164d43a698a9325a5fc0b165?pvs=4)
 
-Assignment: https://classroom.github.com/a/WOIisjVe
+[Assignment](https://classroom.github.com/a/WOIisjVe)
