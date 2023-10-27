@@ -1,4 +1,4 @@
-# Лекция №3
+# Лекция №3 — Traits, Generics
 
 [Презентация](pres/03-traits.pdf)
 
