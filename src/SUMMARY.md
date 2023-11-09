@@ -15,6 +15,7 @@
     + [Лекция №3](./lect/03-traits.md)
     + [Лекция №4](lect/04-DnD.md)
 	+ [Лекция №5](lect/05-closures-iterators.md)
+	+ [Лекция №6](lect/06-modules.md)
 
 - [ДЗ](./hw.md)
 	+ [Гайд по Github Classroom](hw/classroom.md)
