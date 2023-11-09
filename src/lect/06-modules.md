@@ -2,4 +2,4 @@
 
 [Презентация](pres/06-modules.pdf)
 
-[Видео](TODO)
+[Видео](https://youtu.be/HQns4CJ31Dw)
