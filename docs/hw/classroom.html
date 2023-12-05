@@ -1,0 +1,361 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Гайд по Github Classroom - Курс по Rust: Осень 2023</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Общая информация</li><li class="chapter-item expanded "><a href="../general.html"><strong aria-hidden="true">1.</strong> Общее</a></li><li class="chapter-item expanded "><a href="../lecturers.html"><strong aria-hidden="true">2.</strong> Преподаватели</a></li><li class="chapter-item expanded "><a href="../anounce.html"><strong aria-hidden="true">3.</strong> Анонс</a></li><li class="chapter-item expanded "><a href="../plan.html"><strong aria-hidden="true">4.</strong> План курса</a></li><li class="chapter-item expanded "><a href="../ref.html"><strong aria-hidden="true">5.</strong> Полезные ссылки</a></li><li class="chapter-item expanded "><a href="../materials.html"><strong aria-hidden="true">6.</strong> Материалы лекций</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lect/0-lect.html"><strong aria-hidden="true">6.1.</strong> Вводная лекция</a></li><li class="chapter-item expanded "><a href="../lect/01-basic.html"><strong aria-hidden="true">6.2.</strong> Лекция №1</a></li><li class="chapter-item expanded "><a href="../lect/02-structs.html"><strong aria-hidden="true">6.3.</strong> Лекция №2</a></li><li class="chapter-item expanded "><a href="../lect/03-traits.html"><strong aria-hidden="true">6.4.</strong> Лекция №3</a></li><li class="chapter-item expanded "><a href="../lect/04-DnD.html"><strong aria-hidden="true">6.5.</strong> Лекция №4</a></li><li class="chapter-item expanded "><a href="../lect/05-closures-iterators.html"><strong aria-hidden="true">6.6.</strong> Лекция №5</a></li><li class="chapter-item expanded "><a href="../lect/06-modules.html"><strong aria-hidden="true">6.7.</strong> Лекция №6</a></li><li class="chapter-item expanded "><a href="../lect/07-raytracer.html"><strong aria-hidden="true">6.8.</strong> Лекция №7</a></li></ol></li><li class="chapter-item expanded "><a href="../hw.html"><strong aria-hidden="true">7.</strong> ДЗ</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../hw/classroom.html" class="active"><strong aria-hidden="true">7.1.</strong> Гайд по Github Classroom</a></li><li class="chapter-item expanded "><a href="../hw/01-hw.html"><strong aria-hidden="true">7.2.</strong> ДЗ №1</a></li><li class="chapter-item expanded "><a href="../hw/02-hw.html"><strong aria-hidden="true">7.3.</strong> ДЗ №2</a></li><li class="chapter-item expanded "><a href="../hw/03-hw.html"><strong aria-hidden="true">7.4.</strong> ДЗ №3</a></li><li class="chapter-item expanded "><a href="../hw/04-hw.html"><strong aria-hidden="true">7.5.</strong> ДЗ №4</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Практики</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="../hw/practice-iterators.html"><strong aria-hidden="true">8.1.</strong> Пракитка 1</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Курс по Rust: Осень 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Супер-короткий-гайд-по-сдаче-домашек"><a class="header" href="#Супер-короткий-гайд-по-сдаче-домашек">Супер короткий гайд по сдаче домашек</a></h1>
+<h2 id="github"><a class="header" href="#github">GitHub</a></h2>
+<p>Домашки будут сдавать через систему Classroom на Github</p>
+<ol>
+<li>
+<p>Регистрируетесь на Github</p>
+</li>
+<li>
+<p>Опционально — но желательно, если не хотите каждый раз вводить
+пароль:<br />
+<em>пробрасываете SSH-ключи</em>.</p>
+<ul>
+<li>
+<p>Генерируете пару SSH-ключей через утилиту на локальной машине</p>
+</li>
+<li>
+<p>Добавляете SSH-ключ в свой аккаунт на гитхабе (в настройках)</p>
+</li>
+</ul>
+<p>Чуть более подробное описание:
+<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">ссылка</a></p>
+</li>
+<li>
+<p>Мы выкладываем условие домашки и ссылку на <strong>Assigment</strong>
+(собственно, репозиторий с ДЗ)</p>
+</li>
+<li>
+<p>Переходите по ссылке, нажимаете большую зеленую кнопку (Accept this
+assigment)</p>
+</li>
+<li>
+<p>Перезагружаете страницу</p>
+</li>
+<li>
+<p>Появляется ссылка на репу, переходите по ней. Поздравляем, задание
+принято.</p>
+</li>
+</ol>
+<h2 id="git"><a class="header" href="#git">Git</a></h2>
+<ol>
+<li>
+<p>Копируете код из репы себе на локальную машину. В репе будет зеленая
+кнопка <code>code</code>, при нажатии на которую будут доступен вариант ссылок
+на репу.</p>
+<ul>
+<li>
+<p>Если не пробросили SSH ключи, то берете https ссылку</p>
+</li>
+<li>
+<p>Если пробросили SSH ключи, то берете SSH ссылку</p>
+</li>
+</ul>
+<p>Вводите в консоль: <code>$ git clone &lt;ссылка&gt;</code> -- это создаст директорию
+с склонированной репой в текущей директории.</p>
+</li>
+<li>
+<p>Открываете директорию в вашей любимой IDE и <em>выполняете дз</em></p>
+</li>
+<li>
+<p>Для проверки тестов запускаете <code>$ cargo test</code>. Если прошли <strong>все</strong>
+тесты для заданий, которые вы собираетесь сдавать — можно отсылать
+в репу (задания дают баллов по отдельности)</p>
+</li>
+<li>
+<p>Если хотите поиграть с вашим кодом, пишете играющий код в функцию
+<code>main</code>, и запускаете <code>$ cargo run</code>.</p>
+</li>
+<li>
+<p>Чтобы отправить ваше решение на Github, выполните команды</p>
+<p><code>$ git add .</code> -- добавить все новые файлы в коммит</p>
+<p><code>$ git commit -m &lt;message&gt;</code> -- сам коммит файлов с сообщением,
+вместо <code>&lt;message&gt;</code> нужно поставить строчку с описанием того, что
+сделали, например, &quot;Add solution&quot; или &quot;Fix bugs&quot;, если это не первый
+коммит (цифровая культура будет в другой раз). В целом, содержание
+не принципиально.</p>
+<p><code>$ git push</code> сохранит ваши изменения в репозитории на Github</p>
+</li>
+<li>
+<p>Вернитесь в GitHub. </p>
+<blockquote>
+<p>Мы теперь используем свой облачный сервер для actions<sup class="footnote-reference"><a href="#1">1</a></sup>, поэтому теперь actions можно не экономить, и их можно не запускать вручную: они запускаются автоматически при каждом commit-е. При этом в истории коммитов рядом с каждым появляется галочка или крестик.</p>
+</blockquote>
+<p>Если тесты не проходят, можно увидеть более подробный отчет, 
+нажав на галочку или крестик рядом с этим коммитом в истории коммитов.</p>
+</li>
+</ol>
+<p>Вполне возможно, если вы не знакомы с git/Github/gh classroom, при
+чтении этого документа придётся много гуглить. Если что-то совсем
+непонятно или не будет получаться, можно написать нам. Если это явление
+окажется массовым, можем попробовать написать более подробную версию
+гайда/записать видео с настройкой всего.</p>
+<blockquote>
+<h1 id="Правила-пользования-git-для-начинающих"><a class="header" href="#Правила-пользования-git-для-начинающих">Правила пользования Git (для начинающих)</a></h1>
+<ol>
+<li>
+<p><code>git add .</code></p>
+</li>
+<li>
+<p><code>git commit -m &quot;…&quot;</code></p>
+</li>
+<li>
+<p><code>git push origin master</code></p>
+</li>
+</ol>
+<p>Если, НЕ ДАЙ БОГ, случайно сделал что-то другое, то:</p>
+<h2 id="troubleshooting-Как-решить-любую-проблему-c-гитом"><a class="header" href="#troubleshooting-Как-решить-любую-проблему-c-гитом">[Troubleshooting] Как решить любую проблему c гитом</a></h2>
+<ol>
+<li>
+<p>Файлы проекта на месте? Если нет, то всё — пиши пропало.
+«Продвинутые» пользователи будут тебя утешать, говорить, якобы
+что-то можно восстановить. Но их слушать нельзя. Это всё наглая ложь
+— они просто хотят, чтобы ты не плакал =&gt; не мешал им
+работать.</p>
+</li>
+<li>
+<p>Если да (в подавляющем большинстве случаев), то:</p>
+<ol>
+<li>
+<p>Клоним репу в новое место</p>
+</li>
+<li>
+<p>Копируем туда файлы</p>
+</li>
+<li>
+<p>Делаем
+<code>git add . &amp;&amp; git commit -m &quot;…&quot; &amp;&amp; git push origin master</code></p>
+</li>
+<li>
+<p>Удаляем старую папку (<code>sudo rm -rf /</code>)</p>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Actions — система в Github, позволяющая запускать код (в данном
+случае — тесты) на сервере Github при разных событиях (в данном
+случае — коммит). Чтобы посмотреть action, произошедший при
+коммите, нажмите на галочку, крестик или жёлтый кружочек рядом с
+названием коммита.</p>
+</div>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../hw.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../hw/01-hw.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../hw.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../hw/01-hw.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

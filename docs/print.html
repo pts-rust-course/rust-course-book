@@ -1,0 +1,833 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Курс по Rust: Осень 2023</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Общая информация</li><li class="chapter-item expanded "><a href="general.html"><strong aria-hidden="true">1.</strong> Общее</a></li><li class="chapter-item expanded "><a href="lecturers.html"><strong aria-hidden="true">2.</strong> Преподаватели</a></li><li class="chapter-item expanded "><a href="anounce.html"><strong aria-hidden="true">3.</strong> Анонс</a></li><li class="chapter-item expanded "><a href="plan.html"><strong aria-hidden="true">4.</strong> План курса</a></li><li class="chapter-item expanded "><a href="ref.html"><strong aria-hidden="true">5.</strong> Полезные ссылки</a></li><li class="chapter-item expanded "><a href="materials.html"><strong aria-hidden="true">6.</strong> Материалы лекций</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="lect/0-lect.html"><strong aria-hidden="true">6.1.</strong> Вводная лекция</a></li><li class="chapter-item expanded "><a href="lect/01-basic.html"><strong aria-hidden="true">6.2.</strong> Лекция №1</a></li><li class="chapter-item expanded "><a href="lect/02-structs.html"><strong aria-hidden="true">6.3.</strong> Лекция №2</a></li><li class="chapter-item expanded "><a href="lect/03-traits.html"><strong aria-hidden="true">6.4.</strong> Лекция №3</a></li><li class="chapter-item expanded "><a href="lect/04-DnD.html"><strong aria-hidden="true">6.5.</strong> Лекция №4</a></li><li class="chapter-item expanded "><a href="lect/05-closures-iterators.html"><strong aria-hidden="true">6.6.</strong> Лекция №5</a></li><li class="chapter-item expanded "><a href="lect/06-modules.html"><strong aria-hidden="true">6.7.</strong> Лекция №6</a></li><li class="chapter-item expanded "><a href="lect/07-raytracer.html"><strong aria-hidden="true">6.8.</strong> Лекция №7</a></li></ol></li><li class="chapter-item expanded "><a href="hw.html"><strong aria-hidden="true">7.</strong> ДЗ</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="hw/classroom.html"><strong aria-hidden="true">7.1.</strong> Гайд по Github Classroom</a></li><li class="chapter-item expanded "><a href="hw/01-hw.html"><strong aria-hidden="true">7.2.</strong> ДЗ №1</a></li><li class="chapter-item expanded "><a href="hw/02-hw.html"><strong aria-hidden="true">7.3.</strong> ДЗ №2</a></li><li class="chapter-item expanded "><a href="hw/03-hw.html"><strong aria-hidden="true">7.4.</strong> ДЗ №3</a></li><li class="chapter-item expanded "><a href="hw/04-hw.html"><strong aria-hidden="true">7.5.</strong> ДЗ №4</a></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">8.</strong> Практики</div></li><li><ol class="section"><li class="chapter-item expanded "><a href="hw/practice-iterators.html"><strong aria-hidden="true">8.1.</strong> Пракитка 1</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Курс по Rust: Осень 2023</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Общее"><a class="header" href="#Общее">Общее</a></h1>
+<ul>
+<li>
+<p>Курс проходит по четвергам первой парой после занятий.</p>
+</li>
+<li>
+<p>Пока планируем вести его в течение <em>полугодия</em>. Если будет желание и возможность — продлим, но далеко не факт.</p>
+</li>
+<li>
+<p>Восьмиклассникам можно присоединяться к курсу, если они прям уверены в своих силах.</p>
+</li>
+<li>
+<p>Что примерно будем обсуждать, можно посмотреть <a href="./plan.html">здесь</a>. Слова страшные очень, но на самом деле всё достаточно поверхностно и просто. Эта книга будет постепенно дополняться.</p>
+</li>
+<li>
+<p>У нас <em>будут домашки</em>. Небольшие, особенно для знающих людей, но тем не менее. Если понимаете, что не готовы их делать — возможно, лучше отказаться.</p>
+</li>
+<li>
+<p>Ноут на занятиях <strong>не нужен</strong>. Занятия — в основном лекции, потыкаться в код лучше в домашке, удобнее заметно. Мы будем много общаться, иногда кодить коллективным разумом, но параллельно повторять у себя будет сложно.</p>
+</li>
+<li>
+<p>Стандартное правило про 75% посещений для зачета у нас <strong>действует</strong>. Как бы вы хорошо ни решали задачи, без посещений зачёт мы вам просто не можем поставить.</p>
+</li>
+</ul>
+<h2 id="Лекции"><a class="header" href="#Лекции">Лекции</a></h2>
+<p>На занятиях — чисто лекции, для того, чтобы тренироваться, будет небольшая домашка.</p>
+<p>Читаем лекции мы <em>попеременно</em>. &quot;Легкие&quot; темы — Андрей, &quot;Посложнее&quot; — Вова и Илья.</p>
+<p>Будет <em>много материала</em>, поэтому <em>задавайте</em> сразу <em>вопросы</em> по всему, что не очень понятно. Не тормозите!</p>
+<p>В крайнем случае, не бойтесь задавать вопросы в чате — только без спойлеров к домашке. Если думаете, что ваш вопрос может быть кому-то подсказкой — пишите любому из нас в личку.</p>
+<ul>
+<li>Мы тоже будем задавать вопросы <em>вам</em>.</li>
+<li>А ещё будем немного кодить <em>коллективным разумом</em>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Преподаватели"><a class="header" href="#Преподаватели">Преподаватели</a></h1>
+<p>Мы все студенты 2021 года выпуска. Опыта чтения курсов у нас мало,
+так что поначалу лекции могут получиться немного странными, но мы довольно неплохо подготовились!</p>
+<p>Посмотрим, что из этого выйдет!</p>
+<h2 id="Андрей-Ситников-Тимофеевич"><a class="header" href="#Андрей-Ситников-Тимофеевич">Андрей Ситников (Тимофеевич)</a></h2>
+<p>Ник в Телеграмме: <a href="https://t.me/sitandr">@sitandr</a></p>
+<p>Я физик. Выпускник ФТШ. Студент Вышки по направлению &quot;Квантовая теория поля&quot;. И одновременно с этим автор идеи провести этот курс. Не спрашивайте, почему. </p>
+<p>Так как я не совсем &quot;профессиональный&quot; программист, хотя и регулярно использую <strong>Rust</strong> для своих физических плюшек, в этом курсе я буду отвечать за рассказ достаточно &quot;основных&quot; вещей и проверку домашек. Так что со мной придется достаточно много общаться. <code>;)</code>.</p>
+<p>Если что-то не получается, но не хочется писать в общий чат — не бойтесь писать мне в личку.</p>
+<h2 id="Владимир-Латыпов-Витальевич"><a class="header" href="#Владимир-Латыпов-Витальевич">Владимир Латыпов (Витальевич)</a></h2>
+<img src="img/vova.png" width="20%"/>
+<p>Ник в Телеграмме: <a href="https://t.me/donRumata03">@donRumata03</a></p>
+<ul>
+<li>Выпускник ФТШ.</li>
+<li>Студент КТ ИТМО.</li>
+<li>Главный местный тролль и прокрастинатор.</li>
+</ul>
+<blockquote>
+<p>Сфера ответственности: шутки (анонс, даже та часть, которую пропустила цензура, по большей части — его рук творение), продвинутые концепции (иногда облачённые в странные абстрактные формулировки с претензией на глубину — прямо как эта) и программирование микроконтроллеров (aka embedded, «железки»).</p>
+</blockquote>
+<ul>
+<li>За что любит Rust: 
+<ul>
+<li>эстетическое наслаждение от красоты, надёжности и продуманности решений,</li>
+<li>наличие темы для разговора и фактора самоидентификации в рукаве — надо же за что-то топить (btw i use win),</li>
+<li>на Rust не так много вакансий, так что в клубе только мотивированные, инициативные и заряженные первопроходцы!</li>
+</ul>
+</li>
+</ul>
+<h2 id="Илья-Шпильков-Сергеевич"><a class="header" href="#Илья-Шпильков-Сергеевич">Илья Шпильков (Сергеевич)</a></h2>
+<p>Ник в Телеграмме: <a href="https://t.me/@hPotato">@hPotato</a></p>
+<ul>
+<li>Выпускник ЮМШ.</li>
+<li>Студент КТ ИТМО.</li>
+<li>Сфера ответственности: <del>единственный человек, который умеет программировать → отдуваться за всех</del> привносить интеллигентное звучание в лекции.</li>
+<li>Что любит в Rust: там есть некоторое количество извращенских абстракций → есть, чем размять извилины в борьбе с объективной и субъективной когнитивной сложностью (хотя, конечно, не так много, как в Idris…)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Анонс"><a class="header" href="#Анонс">Анонс</a></h1>
+<p>На самом деле мы подготовили два анонса: один формальный, другой не очень. Долго спорили, какой же вывесить. В итоге сошлись на &quot;шуточном&quot;. Но более серьезный тоже может быть интересно почитать, поэтому они здесь будут оба.</p>
+<h2 id="Неформальный-анонс-классический"><a class="header" href="#Неформальный-анонс-классический">Неформальный анонс (классический)</a></h2>
+<p><img src="img/anounce.svg" alt="" /></p>
+<h2 id="Формальный"><a class="header" href="#Формальный">Формальный</a></h2>
+<p><img src="img/old-anounce.svg" alt="" /></p>
+<style>
+	img {
+		background: white;
+	}
+</style><div style="break-before: page; page-break-before: always;"></div><h1 id="План-курса"><a class="header" href="#План-курса">План курса</a></h1>
+<h2 id="Вводное"><a class="header" href="#Вводное">Вводное</a></h2>
+<h3 id="Зачем-нужен-rust"><a class="header" href="#Зачем-нужен-rust">Зачем нужен <strong>Rust</strong>?</a></h3>
+<p>Рассказываем о других языках и проблемах, которые <strong>Rust</strong> призван
+решить.</p>
+<h3 id="Основные-идеи-rust"><a class="header" href="#Основные-идеи-rust">Основные идеи <strong>Rust</strong></a></h3>
+<p>Рассказываем о <code>Borrow Rules</code>, <code>Lifetimes</code>, и о том, как они решают
+проблемы работы с памятью. Показываем примеры кода, рассказываем о еще
+нескольких важных понятиях для <strong>Rust</strong>.</p>
+<h3 id="tooling"><a class="header" href="#tooling">Tooling</a></h3>
+<p>Рассказываем про экосистему, средства сборки, показываем и наглядно
+используем <code>cargo</code>. Говорим про установку и поддержку в IDE. Пара слов
+про <code>nightly</code>, <code>toolchain</code>-ы и <code>no-std</code>.</p>
+<h2 id="Основы-синтаксиса"><a class="header" href="#Основы-синтаксиса">Основы синтаксиса</a></h2>
+<h3 id="Простейший-синтаксис"><a class="header" href="#Простейший-синтаксис">Простейший синтаксис</a></h3>
+<p><code>let; if; while; for + range; loop; fn</code>. Простейшие декларативные
+макросы. Рассказываем про общую идею выражений <strong>Rust</strong>, обращаем
+внимание на мутабельность.</p>
+<h3 id="Примитивы"><a class="header" href="#Примитивы">Примитивы</a></h3>
+<p><code>bool; u64; i64; f64</code>. <code>usize</code>. Составные типы. Tuples, <code>[x;n]</code>. <code>Vec</code>
+как пример сложного <code>Non-Copy</code> объекта.</p>
+<h3 id="Простейшие-ссылки"><a class="header" href="#Простейшие-ссылки">Простейшие ссылки</a></h3>
+<p>Синтаксис, разыменовывание, Borrow rule. Пример &quot;нетривиальных&quot; ссылок
+на основе <code>slice</code>-в <code>Vec</code>-ов.</p>
+<h2 id="Структуры-и-алгебраические-типы-данных"><a class="header" href="#Структуры-и-алгебраические-типы-данных">Структуры и алгебраические типы данных</a></h2>
+<h3 id="Что-это-такое"><a class="header" href="#Что-это-такое">Что это такое</a></h3>
+<p><code>struct; enum</code>. Пара слов о внутреннем представлении. Работа с <code>impl</code>,
+<code>self, &amp;self, &amp;mut self</code>.</p>
+<h3 id="match"><a class="header" href="#match">Match</a></h3>
+<p><code>match</code> ветки, паттерны, применение для <code>enum</code>. Продвинутые паттерны.</p>
+<h3 id="Пример-применения-обработка-ошибок"><a class="header" href="#Пример-применения-обработка-ошибок">Пример применения: обработка ошибок</a></h3>
+<p>Проблемы <code>panic!</code>. <code>Option, Result</code>, <code>?</code>. Примеры методов из стандартной
+библиотеки: комбинаторы.</p>
+<h2 id="Введение-в-trait-ы-и-generic-и"><a class="header" href="#Введение-в-trait-ы-и-generic-и">Введение в <code>trait</code>-ы и generic-и</a></h2>
+<h3 id="Что-это-такое-и-зачем-нужно"><a class="header" href="#Что-это-такое-и-зачем-нужно">Что это такое и зачем нужно</a></h3>
+<p>Написание кода, который опирается не на конкретные типы, а их свойства.
+Синтаксис <code>trait</code>-ов и ограничений на <code>generic</code>-ки. Сравнение с
+интерфейсами из ООП языков и шаблонами/<code>generic</code>-ами в С++/Java
+соответственно.</p>
+<h3 id="Примеры-основных-trait-ов-определенных-в-стандратной-библиотеке"><a class="header" href="#Примеры-основных-trait-ов-определенных-в-стандратной-библиотеке">Примеры основных <code>trait</code>-ов, определенных в стандратной библиотеке</a></h3>
+<p><code>Clone; Default; Eq; Ord; Display; Drop</code> и другие. Примеры <code>trait</code>-ов,
+имеющих особую интеграцию с компилятором. Oprhan rules. Использование
+<code>derive</code> макросов для избегания ручной работы.</p>
+<h3 id="Во-что-компилируется"><a class="header" href="#Во-что-компилируется">Во что компилируется</a></h3>
+<p>Мономорфизация. Влияние на compile time, runtime (оптимизазции, кэш) и
+потребляемую память.</p>
+<h2 id="Динамический-полиморфизм"><a class="header" href="#Динамический-полиморфизм">Динамический полиморфизм</a></h2>
+<h3 id="Умные-указатели"><a class="header" href="#Умные-указатели">Умные указатели</a></h3>
+<p><code>Box; Rc</code>: задачи каждого, идея реализация в стандартной бибилотеке.</p>
+<p>Представление DST в памяти --- «жирные» указатели: <code>[T]</code>, <code>dyn Trait</code>.</p>
+<h3 id="trait-objects-задачи-реализация"><a class="header" href="#trait-objects-задачи-реализация"><code>trait objects</code>: задачи, реализация</a></h3>
+<p>Границы применимости static и dynamic dispatch. Object safety.</p>
+<p>Сравнение с другими подходами и языками: библиотека <code>enum_dispatch</code>,
+реализация полиморфизма в Haskell, Java и C++.</p>
+<h3 id="Пример-применения-для-обработки-ошибок-dyn-error"><a class="header" href="#Пример-применения-для-обработки-ошибок-dyn-error">Пример применения для обработки ошибок: dyn Error</a></h3>
+<p>Преимущества и недостатки по сравнению с отсутствием type erasure.</p>
+<p>Библиотеки макросов для создания своих типов ошибок и оборачивания
+функций.</p>
+<h2 id="Функции-и-Итераторы"><a class="header" href="#Функции-и-Итераторы">Функции и Итераторы</a></h2>
+<h3 id="Замыкания"><a class="header" href="#Замыкания">Замыкания</a></h3>
+<p>Синтаксис замыканий и <code>Fn</code>-трейты. Внутренние устройство замыканий.</p>
+<h3 id="Использование-замыканий-комбинаторы-итераторов"><a class="header" href="#Использование-замыканий-комбинаторы-итераторов">Использование замыканий: комбинаторы итераторов</a></h3>
+<p><code>trait Iterator</code> и его расширения. Ускорение кода. Примеры использования
+комбинаторов: <code>filter</code>, <code>map</code>, <code>flatten</code> и другие. Связанные с
+итераторами <code>trait</code>-ы: <code>IntoIterator</code> и <code>FromIterator</code>.</p>
+<h3 id="Реализация-итератора"><a class="header" href="#Реализация-итератора">Реализация итератора</a></h3>
+<p>Пример реализации итератора для кастомной структуры.</p>
+<h2 id="Модули"><a class="header" href="#Модули">Модули</a></h2>
+<h3 id="Основы"><a class="header" href="#Основы">Основы</a></h3>
+<p><code>mod</code>, области видимости. Пути, <code>super</code>, <code>crate</code>, <code>::</code>, обращения к
+стандартной библиотеке.</p>
+<h3 id="Сборка-конфигурация-и-инструменты"><a class="header" href="#Сборка-конфигурация-и-инструменты">Сборка, конфигурация и инструменты</a></h3>
+<p><code>rustc</code>. Файл <code>toml</code>. Оптимизации. <code>no-std</code>. Сборка под библиотеки и
+бинарники. <code>##[cfg]</code>. <code>build.rs</code>. <code>cargo fmt</code> и <code>clippy</code>. <code>##[allow]</code> и
+другие.</p>
+<h3 id="Библиотеки"><a class="header" href="#Библиотеки">Библиотеки</a></h3>
+<p>Установка через запись в <code>toml</code>. Features. Установка из
+Github-репозиториев. Примеры: itertools, serde, lazy-static</p>
+<h2 id="lifetimes"><a class="header" href="#lifetimes">Lifetimes</a></h2>
+<h3 id="Обоснование-необходимости"><a class="header" href="#Обоснование-необходимости">Обоснование необходимости</a></h3>
+<p>Примеры ошибок, возможных в C++, которые позволяют избежать система
+владения и времена жизни в Rust.</p>
+<h3 id="Правила-ссылок-реализация-в-компиляторе"><a class="header" href="#Правила-ссылок-реализация-в-компиляторе">Правила ссылок, реализация в компиляторе</a></h3>
+<p>Обобщение примеров выше, формулировка правил, постановка задачи
+компилятора. Lifetime elision, ограничения подхода.</p>
+<h3 id="Взаимодействия-с-другими-средствами-языка"><a class="header" href="#Взаимодействия-с-другими-средствами-языка">Взаимодействия с другими средствами языка</a></h3>
+<p>Конкурентное изменение, избегание data race-ов. Оптимизации, которые
+даёт анализ алиасов. Релаксация ограничений с помощью Interior
+Mutability.</p>
+<h2 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h2>
+<h3 id="Что-разрешает-unsafe"><a class="header" href="#Что-разрешает-unsafe">Что разрешает <code>unsafe</code>?</a></h3>
+<p>Операции, допустимые в <code>unsafe</code>. Работа с сырыми указателями. Утечки
+памяти. Undefined behaviour.</p>
+<h3 id="unsafe-для-безопасных-абстракций"><a class="header" href="#unsafe-для-безопасных-абстракций"><code>unsafe</code> для безопасных абстракций</a></h3>
+<p>Инкапсуляция <code>unsafe</code> кода, разделение ответственности. Инструменты для
+детектирования плохих мест в <code>unsafe</code>.</p>
+<h3 id="ffi"><a class="header" href="#ffi">FFI</a></h3>
+<p>Безопасные обертки над небезопасными библиотеками. Пример вызовов
+<code>C++</code>-кода.</p>
+<h2 id="Макросы"><a class="header" href="#Макросы">Макросы</a></h2>
+<h3 id="Обзор"><a class="header" href="#Обзор">Обзор</a></h3>
+<p>Идеология. Возможности. Ограничения. Сравнение с C++.</p>
+<h3 id="Декларативные"><a class="header" href="#Декларативные">Декларативные</a></h3>
+<p>Работа с семантическими токенами. Виды токенов. Разбор работы <code>dbg!</code>.
+Пример декларативного макроса.</p>
+<h3 id="Процедурные"><a class="header" href="#Процедурные">Процедурные</a></h3>
+<p>Вычисления в compile-time. Библиотеки для макросов. <code>cite</code>, <code>quote</code>,
+<code>syn</code>. <code>##[derive]</code>. Пример процедурного макроса.</p>
+<h2 id="Многопоточность"><a class="header" href="#Многопоточность">Многопоточность</a></h2>
+<h3 id="Потоки"><a class="header" href="#Потоки">Потоки</a></h3>
+<p>Современный характер выполнения закона Мура (многоядерные процессоры).
+Обзор средств стандратной библиотеки для работы с потоками. Примитивы
+синхронизации.</p>
+<h3 id="Абстракции-над-потоками"><a class="header" href="#Абстракции-над-потоками">Абстракции над потоками</a></h3>
+<ul>
+<li>
+<p>thread pool</p>
+</li>
+<li>
+<p>Подход библиотеки rayon (data parallelism, work-stealing)</p>
+</li>
+</ul>
+<h3 id="async"><a class="header" href="#async">Async</a></h3>
+<ul>
+<li>
+<p>Примеры ситуаций, где процессорное время --- не ограничитель
+производительности.</p>
+</li>
+<li>
+<p>Поддержка создания конечных автоматов на уровне языка через ключевые
+слова</p>
+</li>
+<li>
+<p>future-ы, executor-ы</p>
+</li>
+<li>
+<p>Примеры асинхронных фреймворков: tokio, smol (для контроллеров).</p>
+</li>
+<li>
+<p>Поддержка на уровне операционной системы и устройств ввода/вывода,
+прерывания.</p>
+</li>
+</ul>
+<h2 id="Снова-библиотеки"><a class="header" href="#Снова-библиотеки">Снова библиотеки</a></h2>
+<h3 id="Обзор-популярных-проектов"><a class="header" href="#Обзор-популярных-проектов">Обзор популярных проектов</a></h3>
+<p>Tauri, Typst, Bevy, Polars, Chumsky. Обсуждение, какие используются фичи
+Rust.</p>
+<h3 id="gui-с-помощью-egui"><a class="header" href="#gui-с-помощью-egui">GUI с помощью <code>egui</code></a></h3>
+<p>Идеология <code>immidiate view</code> GUI. Minimal working example. Экспорт в
+WebAssembly.</p>
+<h3 id="Библиотека-для-python"><a class="header" href="#Библиотека-для-python">Библиотека для Python</a></h3>
+<p>Мотивация. <code>rustimport</code>. Минимальный пример.</p>
+<h2 id="embedded-stuff"><a class="header" href="#embedded-stuff">Embedded stuff</a></h2>
+<h3 id="Работа-в-условиях-no-std"><a class="header" href="#Работа-в-условиях-no-std">Работа в условиях <code>no-std</code></a></h3>
+<ul>
+<li>
+<p>Отсутствие операционной системы</p>
+</li>
+<li>
+<p>Hard real time --- предсказуемость производительности (избегание
+аллокаций, амортизированной асимптотики)</p>
+</li>
+<li>
+<p>memory-mapped I/O</p>
+</li>
+<li>
+<p>Прерывания, interrupt controller</p>
+</li>
+<li>
+<p>Периферии: концепция, примеры</p>
+</li>
+<li>
+<p>Direct memory access</p>
+</li>
+</ul>
+<h3 id="Применение-механизмов-языка"><a class="header" href="#Применение-механизмов-языка">Применение механизмов языка</a></h3>
+<p>Паттерны для embedded</p>
+<ul>
+<li>
+<p>typestate</p>
+</li>
+<li>
+<p>borrow checker</p>
+</li>
+<li>
+<p>singleton</p>
+</li>
+<li>
+<p>модели асинхронности, библиотека <code>nb</code>.</p>
+</li>
+</ul>
+<h3 id="Библиотеки-экосистема"><a class="header" href="#Библиотеки-экосистема">Библиотеки, экосистема</a></h3>
+<ul>
+<li>
+<p>Взаимодействие с кодом на C.</p>
+</li>
+<li>
+<p>RTOS</p>
+</li>
+<li>
+<p>Экосистема embedded-hal.</p>
+</li>
+<li>
+<p>Фреймворк embassy-rs.</p>
+</li>
+</ul>
+<h3 id="Демонстрация-работы"><a class="header" href="#Демонстрация-работы">Демонстрация работы</a></h3>
+<p>Пример устройства из физического мира, контроллер на котором
+запрограммирован на Rust.</p>
+<style>
+	.content {
+	    counter-reset: h1;
+	}
+	.content h1 {
+	    counter-reset: h2;
+	    counter-set: h2 -1;
+	}
+
+	.content h2 {
+	    counter-reset: h3
+	}
+
+	.content h3 {
+	    counter-reset: h4
+	}
+
+	.content h2:before {
+	    counter-increment: h2;
+	    content: "Занятие №" counter(h2) ": "
+	}
+
+	.content h3:before {
+	    counter-increment: h3;
+	    content: counter(h2) "." counter(h3) ". "
+	}
+
+	.content h4:before {
+	    counter-increment: h4;
+	    content: counter(h2) "." counter(h3) "." counter(h4) ". "
+	}
+
+</style><div style="break-before: page; page-break-before: always;"></div><h1 id="Полезные-ссылки"><a class="header" href="#Полезные-ссылки">Полезные ссылки</a></h1>
+<p>Мы будем стараться дать необходимый минимум, но иногда этого будет мало.
+К счастью, в мире программирования очень легко добывать нужную информацию.
+Если вы знаете английский, конечно.
+А сообщество <strong>Rust</strong> подготовило много обучающих и справочных ресурсов, так что иногда заглядывать в них может быть полезно.</p>
+<h2 id="Как-установить-rust"><a class="header" href="#Как-установить-rust">Как установить Rust</a></h2>
+<p><a href="https://doc.rust-lang.ru/book/ch01-01-installation.html">Смотри на эту страницу</a>. Дальше читать не надо, структура этой книги очень отличается от нашего курса, можно запутаться.</p>
+<p>Не забудьте в конце сделать <code>rustup update</code>.</p>
+<p>Если все в порядке, попробуйте выполнить в <em>пустой папке</em>, которую не жалко (<strong>очень важно, чтобы не было русских букв в названии и пути к этой папке</strong>):</p>
+<p><code>cargo init</code></p>
+<p>Эта команда создаст в этой папке новый Rust проект с <code>Hello world!</code>. Если все в порядке, запустите</p>
+<p><code>cargo run</code>.</p>
+<p>Если оно скомпилировалось, запустилось, и напечатало <code>Hello world</code> — поздравляю, <strong>Rust</strong> установлен.</p>
+<h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
+<p>Вместе с компилятором Rust разрабатывается поддержка протокола LSP (language support server), который позволяет эффективно работать с кодом на Rust в любой адекватной IDE. Реализация поддержки называется <code>rust-analyzer</code>. Кроме того, часть функций, традиционных для IDE, на себя берёт заботливый компилятор.</p>
+<p>Но чаще всего выбирают такие варианты:</p>
+<ul>
+<li>С небольшим отрывом, самая популярная IDE среди Rust разработчиков — <code>Visual Studio Code</code> с <code>rust-analyzer</code>.</li>
+<li>Если вы JetBrains раб, то выбор очевиден: JB недавно выпустили новую IDE специально для Rust: <code>RustRover</code>. Правда, уничтожив тем самым OpenSource плагин, выполняя работу, которую и так делает команда разработчиков Rust, и продавая это всё по подписке. Ученикам и студентам — бесплатно (правда, сейчас жалуются на перебои подтверждения статуса обучающегося из России).
+… а в остальном — мощная, приятная и красивая IDE, ещё и привычная многим пользователям других языков.</li>
+<li>Если вы извращенец другого рода и любите Vim, никаких проблем: используйте всё тот же Rust LSP.</li>
+<li>Теоретически, благодаря строгому и догадливому компилятору, на Rust можно писать даже в блокноте… Но, бесспорно, с IDE удобнее. Как и в любом языке, подсветка, отображение типов и переходы к определению/использованиям очень помогают. Кроме того, за счёт статической типизации, поддаваемости анализу и некоторой синтаксической избыточности Rust отлично сочетается с IDE.</li>
+</ul>
+<h2 id="Так-что-дальше"><a class="header" href="#Так-что-дальше">Так, что дальше?</a></h2>
+<p>Если уже установлен <code>rustup</code> — <code>rustup doc</code> даёт много полезных книг, которые находятся прямо у вас на компьютере. Можно ехать в лес с ноутбуком и изучать <strong>Rust</strong> (я (может быть, <em>ты</em>?) так делал, было неплохо).
+Альтернативный вариант — официальный сайт <a href="https://www.rust-lang.org/learn">Rust</a>.
+Ещё можно распечатать книгу (может потребоваться страниц 200) и повторять процесс после каждого коммита в книгу. Тогда можно читать и без ноутбука.</p>
+<p>На сайтах для большинства этих книг есть переводы на русский, так что если кому не очень хочется лишний раз потренироваться в английском — можно изучать и их.</p>
+<p>Для тех, кому внезапно захотелось потроллить <strong>Rust</strong> связными списками — <a href="https://rust-unofficial.github.io/too-many-lists/">на эту тему тоже есть неплохая книга для изучения языка</a>.</p>
+<p>Как вы могли заметить, Rust принято почти все гайды оформлять с помощью фреймворка mdBook, их называют <del>«бяками»</del> «буками».</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Материалы-лекций"><a class="header" href="#Материалы-лекций">Материалы лекций</a></h1>
+<p>В этот раздел складываем презентации, записи и код, который написали на лекциях.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Вводная-лекция--Хвалим-rust-48-минут"><a class="header" href="#Вводная-лекция--Хвалим-rust-48-минут">Вводная лекция — Хвалим Rust 48 минут</a></h1>
+<p><a href="lect/pres/0-intro.pdf">Презентация</a></p>
+<p><a href="https://www.youtube.com/watch?v=uFja4Vg9QTI">Видео</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-1--Основы-синтаксиса"><a class="header" href="#Лекция-1--Основы-синтаксиса">Лекция №1 — Основы синтаксиса</a></h1>
+<p><a href="lect/pres/01-basic.pdf">Презентация</a></p>
+<p><a href="https://youtu.be/Jr1G2hVM16o">Видео</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-2--Структуры"><a class="header" href="#Лекция-2--Структуры">Лекция №2 — Структуры</a></h1>
+<p><a href="lect/pres/02-structs.pdf">Презентация</a></p>
+<p><a href="https://youtu.be/ztJSYLvnoTI">Видео</a></p>
+<p><a href="https://github.com/pts-rust-course/lecture-live-coding/blob/main/02-structs/src/main.rs">Результат лайв-кодинга</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-3--traits-generics"><a class="header" href="#Лекция-3--traits-generics">Лекция №3 — Traits, Generics</a></h1>
+<p><a href="lect/pres/03-traits.pdf">Презентация</a></p>
+<p><a href="https://www.youtube.com/watch?v=saiNKO_Kit4">Видео</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-4--динамический-полиморфизм"><a class="header" href="#Лекция-4--динамический-полиморфизм">Лекция №4 — динамический полиморфизм</a></h1>
+<p><a href="lect/pres/04-DnD.pdf">Презентация</a></p>
+<p><a href="https://www.youtube.com/watch?v=TdNWnmgyPjA&amp;list=PLMdakVOACD9Ww337BXmG7AkozZalW0W--&amp;index=5">Видео</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-5--Замыкания-и-итераторы"><a class="header" href="#Лекция-5--Замыкания-и-итераторы">Лекция №5 — Замыкания и итераторы</a></h1>
+<p><a href="lect/pres/05-closures-iterators.pdf">Презентация</a></p>
+<p><a href="https://www.youtube.com/watch?v=AsXyfas-zaQ&amp;list=PLMdakVOACD9Ww337BXmG7AkozZalW0W--&amp;index=6">Видео первой части (closures) — Андрей, очно</a></p>
+<p><a href="https://www.youtube.com/watch?v=AsXyfas-zaQ&amp;list=PLMdakVOACD9Ww337BXmG7AkozZalW0W--&amp;index=6">Видео второй части (iterators) — Вова, дистанционно</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-6--Модули-библиотеки"><a class="header" href="#Лекция-6--Модули-библиотеки">Лекция №6 — Модули, библиотеки</a></h1>
+<p><a href="lect/pres/06-modules.pdf">Презентация</a></p>
+<p><a href="https://youtu.be/HQns4CJ31Dw">Видео</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Лекция-7--ray-tracing"><a class="header" href="#Лекция-7--ray-tracing">Лекция №7 — Ray tracing</a></h1>
+<p><a href="lect/pres/07-raytracer.pdf">Презентация</a>.</p>
+<p><a href="https://youtu.be/l9sJMEKsbro">Видео</a>.</p>
+<p><a href="lect/../hw/04-hw.html">Практика (aka ДЗ №4)</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Общая-информация"><a class="header" href="#Общая-информация">Общая информация</a></h1>
+<h2 id="Правила-игры"><a class="header" href="#Правила-игры">Правила игры</a></h2>
+<p>После каждого занятия (вернее, в этот же день), мы выкладываем домашку.
+Без практики программирования по-настоящему изучить язык почти невозможно (без борьбы с компилятором это не изучение <strong>Rust</strong>).</p>
+<p>Чтобы получить зачёт, нужно набрать 60% баллов. Это верхняя граница, в этом случае Вы гарантированно получите зачёт. Есть шансы, что граница немного опустится, но рассчитывать на это не стоит.</p>
+<p>Домашка несложная — <del>будет весело, но выживут не все</del> если слушать лекции, должна <em>решаться за полчаса</em>.</p>
+<blockquote>
+<p>Если не делать ДЗ, скорее всего содержание следующих лекций смешается с предыдущими и всё превратится в кашу.</p>
+<p>Без закрепления навыка вся теория будет забываться
+и при попытке написать что-нибудь очень важное на Rust вы обнаружите себя беспомощным в борьбе с Borrow checker-ом,
+сдадитесь и вернётесь на свой Python…</p>
+<p>…не надо так.</p>
+</blockquote>
+<p>Мы понимаем, что у вас</p>
+<ul>
+<li>из-за недостатка опыта может быть слабо наработана «механика программирования»</li>
+<li>Очень мало свободного времени (жизнь молодая, да ещё и в ФТШ учитесь!) </li>
+</ul>
+<p>Поэтому при составлении ДЗ мы руководствуемся такими принципами (aka «Доктрина хорошего ДЗ»):</p>
+<ul>
+<li>Ориентация на глубокое понимание, минимум муторности (то есть проходящий курс должен меньше писать, больше изучать, в том числе — код)</li>
+<li>ДЗ должно быть непосредственно связано с концепциями, пройденными на предыдущем уроке</li>
+<li>ДЗ включает несколько пунктов, ±упорядоченных по уровню сложности, но для зачёта не обязательно делать всё, можно выбирать понравившиеся задачи!</li>
+<li>Сложность мы будем подстраивать:
+<ul>
+<li>общую сложность в зависимости от среднего объёма решений (если будет мало решенных задач — <del>усложним</del> упростим)</li>
+<li>дифференциацию уровней сложности в зависимости от разброса (если будет большой разброс по решённым задачам, добавим бонусные задачи посложнее, чтобы «топы» не скучали)</li>
+</ul>
+</li>
+<li>Должно быть в целом не слишком сложно: каждый из преподавателей должен железно смочь сделать ДЗ целиком за 30 минут</li>
+<li>Часть ДЗ будет снабжено &quot;захватывающим сюжетом&quot;. В некоторых случаях он опционален, можно скачать версию ДЗ без него. :)</li>
+<li>Есть вероятность, что будет какой-то проект на Rust в конце или, возможно, экзамен (пока не планируется)</li>
+</ul>
+<p>Суммарные баллы могут меняться по сложности домашки. В домашках может быть больше баллов, чем 100%. Дополнительные баллы в домашках будут отмечаться как &quot;бонусные&quot; (к задачам они не привязаны).</p>
+<h3 id="Дедлайны"><a class="header" href="#Дедлайны">Дедлайны</a></h3>
+<p>На выполнение домашки дается время до следующего занятия. Нужно склонировать репозиторий в <strong>Github Classroom</strong>, и сделать так, чтобы <code>cargo test</code> полностью проходился для тех задач, которые вы решаете. После этого можно делать <code>PR</code>.</p>
+<p>После того, как вы делаете <code>PR</code>, вы сразу получаете 70% баллов от баллов за решенные задачи. Код менять после этого лучше <em>не стоит</em> (если <em>очень надо</em>, то можно, но лучше успеть сделать всё до).</p>
+<p>После &quot;сабмита&quot; мы смотрим на ваш код (наш дедлайн — два дня после следующего занятия), и, если нам всё нравится, добавляем ещё 30% (к тем задачам, которые нам нравятся). Если не очень — просим что-то поменять. Дедлайн — пять дней после следующего занятия. <em>Попытка исправления есть только одна</em>.</p>
+<p>Если после исправления нам всё нравится, добавляется ещё 30%.</p>
+<p><em>Исправления — это про придирки, а не нарушения правил. Изменение системы проверки, нарушение важных требований задач исправлению не подлежат.</em></p>
+<p>Еще раз все тайминги:</p>
+<ul>
+<li><strong>Вечер четверга</strong> — мы выкладываем домашку в эту книгу.</li>
+<li><strong>23:59 среды на следующей неделе</strong> — дедлайн сдачи домашки.</li>
+<li><strong>23:59 пятницы</strong> — дедлайн присылания &quot;правок&quot; от нас (если мы не прислали, автоматически получаете 100%).</li>
+<li><strong>23:59 воскресенья</strong> — дедлайн исправлений.</li>
+</ul>
+<h2 id="Вопросы"><a class="header" href="#Вопросы">Вопросы</a></h2>
+<p>Чтобы освежить материал в памяти во время выполнения ДЗ может быть полезно перечитать презентацию/пересмотреть лекцию,
+изучить доки на <code>docs.rs</code>, почитать соответствующий отдел, погуглить на <code>StackOverflow</code> и статьи (читать можно, копипастить не рекомендуется).</p>
+<p>Если ничего из этого не помогло, если у вас <em>особый случай</em>, если вам кажется,
+что вы нашли ошибку в компиляторе или если всё так плохо, что вы даже не знаете,
+что гуглить, <del>звоните 01</del> пишите нам — в чат курса.
+Вопросы (в том числе — каверзные) приветствуются.</p>
+<p>Вопросы, которые могут содержать спойлеры к домашке (или стыдно такое спрашивать в общем чате) — пишите в личку преподавателю, который больше нравится, это нормально.</p>
+<p>Тегать преподавателей можно, но скорость ответа это не сильно повысит
+(разве что если вы разведёте такой флуд, что вопрос будет сложно заметить :)… или если такой флуд разведём <em>мы</em>)</p>
+<p>Худший случай скорости ответа не специфицирован, но, скорее всего, ответим <em>довольно быстро</em>!</p>
+<h2 id="Система-проверки"><a class="header" href="#Система-проверки">Система проверки</a></h2>
+<p>Каждая домашка — свой проект <code>cargo</code>, состоящий из файлов решения и тестов — файлов проверки.
+В файлы проверки заглядывать не требуется, но если интересно — можно, возможно,
+это даже может немного помочь с решением… или пониманием условия.</p>
+<p>Решение пишется в файле <code>src/solution.rs</code> или в папке <code>src/solution/…</code>.</p>
+<p>В этом файле содержится функция <code>main</code>, в которой можно писать код, который будет выполняться при запуске <code>cargo run</code>.
+Это позволяет удобно тестировать и отлаживать код.</p>
+<h2 id="Отправление-решения"><a class="header" href="#Отправление-решения">Отправление решения</a></h2>
+<p>Перед тем, как отправлять решение:</p>
+<ul>
+<li>Проверьте, что код компилируется и не выдает предупреждений.</li>
+<li><code>cargo test</code>. Проверьте, что все нужные тесты проходят.</li>
+<li><code>cargo clippy</code>. Полезный анализ кода, который может помочь исправить некоторые очевидные ошибки.</li>
+<li><code>cargo fmt</code> — автоматически форматирует код к более приличному виду. <strong>Пожалуйста</strong>, <em>не пропускайте этот шаг</em>, нам это ещё проверять!</li>
+</ul>
+<h2 id="Организация"><a class="header" href="#Организация">Организация</a></h2>
+<p>Мы используем Github Classroom. От вас требуется умение работать с git, Github, создавания PR.</p>
+<p><strong>TODO (Вова/Илья): написать про использование GC</strong></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Супер-короткий-гайд-по-сдаче-домашек"><a class="header" href="#Супер-короткий-гайд-по-сдаче-домашек">Супер короткий гайд по сдаче домашек</a></h1>
+<h2 id="github"><a class="header" href="#github">GitHub</a></h2>
+<p>Домашки будут сдавать через систему Classroom на Github</p>
+<ol>
+<li>
+<p>Регистрируетесь на Github</p>
+</li>
+<li>
+<p>Опционально — но желательно, если не хотите каждый раз вводить
+пароль:<br />
+<em>пробрасываете SSH-ключи</em>.</p>
+<ul>
+<li>
+<p>Генерируете пару SSH-ключей через утилиту на локальной машине</p>
+</li>
+<li>
+<p>Добавляете SSH-ключ в свой аккаунт на гитхабе (в настройках)</p>
+</li>
+</ul>
+<p>Чуть более подробное описание:
+<a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account">ссылка</a></p>
+</li>
+<li>
+<p>Мы выкладываем условие домашки и ссылку на <strong>Assigment</strong>
+(собственно, репозиторий с ДЗ)</p>
+</li>
+<li>
+<p>Переходите по ссылке, нажимаете большую зеленую кнопку (Accept this
+assigment)</p>
+</li>
+<li>
+<p>Перезагружаете страницу</p>
+</li>
+<li>
+<p>Появляется ссылка на репу, переходите по ней. Поздравляем, задание
+принято.</p>
+</li>
+</ol>
+<h2 id="git"><a class="header" href="#git">Git</a></h2>
+<ol>
+<li>
+<p>Копируете код из репы себе на локальную машину. В репе будет зеленая
+кнопка <code>code</code>, при нажатии на которую будут доступен вариант ссылок
+на репу.</p>
+<ul>
+<li>
+<p>Если не пробросили SSH ключи, то берете https ссылку</p>
+</li>
+<li>
+<p>Если пробросили SSH ключи, то берете SSH ссылку</p>
+</li>
+</ul>
+<p>Вводите в консоль: <code>$ git clone &lt;ссылка&gt;</code> -- это создаст директорию
+с склонированной репой в текущей директории.</p>
+</li>
+<li>
+<p>Открываете директорию в вашей любимой IDE и <em>выполняете дз</em></p>
+</li>
+<li>
+<p>Для проверки тестов запускаете <code>$ cargo test</code>. Если прошли <strong>все</strong>
+тесты для заданий, которые вы собираетесь сдавать — можно отсылать
+в репу (задания дают баллов по отдельности)</p>
+</li>
+<li>
+<p>Если хотите поиграть с вашим кодом, пишете играющий код в функцию
+<code>main</code>, и запускаете <code>$ cargo run</code>.</p>
+</li>
+<li>
+<p>Чтобы отправить ваше решение на Github, выполните команды</p>
+<p><code>$ git add .</code> -- добавить все новые файлы в коммит</p>
+<p><code>$ git commit -m &lt;message&gt;</code> -- сам коммит файлов с сообщением,
+вместо <code>&lt;message&gt;</code> нужно поставить строчку с описанием того, что
+сделали, например, &quot;Add solution&quot; или &quot;Fix bugs&quot;, если это не первый
+коммит (цифровая культура будет в другой раз). В целом, содержание
+не принципиально.</p>
+<p><code>$ git push</code> сохранит ваши изменения в репозитории на Github</p>
+</li>
+<li>
+<p>Вернитесь в GitHub. </p>
+<blockquote>
+<p>Мы теперь используем свой облачный сервер для actions<sup class="footnote-reference"><a href="#1">1</a></sup>, поэтому теперь actions можно не экономить, и их можно не запускать вручную: они запускаются автоматически при каждом commit-е. При этом в истории коммитов рядом с каждым появляется галочка или крестик.</p>
+</blockquote>
+<p>Если тесты не проходят, можно увидеть более подробный отчет, 
+нажав на галочку или крестик рядом с этим коммитом в истории коммитов.</p>
+</li>
+</ol>
+<p>Вполне возможно, если вы не знакомы с git/Github/gh classroom, при
+чтении этого документа придётся много гуглить. Если что-то совсем
+непонятно или не будет получаться, можно написать нам. Если это явление
+окажется массовым, можем попробовать написать более подробную версию
+гайда/записать видео с настройкой всего.</p>
+<blockquote>
+<h1 id="Правила-пользования-git-для-начинающих"><a class="header" href="#Правила-пользования-git-для-начинающих">Правила пользования Git (для начинающих)</a></h1>
+<ol>
+<li>
+<p><code>git add .</code></p>
+</li>
+<li>
+<p><code>git commit -m &quot;…&quot;</code></p>
+</li>
+<li>
+<p><code>git push origin master</code></p>
+</li>
+</ol>
+<p>Если, НЕ ДАЙ БОГ, случайно сделал что-то другое, то:</p>
+<h2 id="troubleshooting-Как-решить-любую-проблему-c-гитом"><a class="header" href="#troubleshooting-Как-решить-любую-проблему-c-гитом">[Troubleshooting] Как решить любую проблему c гитом</a></h2>
+<ol>
+<li>
+<p>Файлы проекта на месте? Если нет, то всё — пиши пропало.
+«Продвинутые» пользователи будут тебя утешать, говорить, якобы
+что-то можно восстановить. Но их слушать нельзя. Это всё наглая ложь
+— они просто хотят, чтобы ты не плакал =&gt; не мешал им
+работать.</p>
+</li>
+<li>
+<p>Если да (в подавляющем большинстве случаев), то:</p>
+<ol>
+<li>
+<p>Клоним репу в новое место</p>
+</li>
+<li>
+<p>Копируем туда файлы</p>
+</li>
+<li>
+<p>Делаем
+<code>git add . &amp;&amp; git commit -m &quot;…&quot; &amp;&amp; git push origin master</code></p>
+</li>
+<li>
+<p>Удаляем старую папку (<code>sudo rm -rf /</code>)</p>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>Actions — система в Github, позволяющая запускать код (в данном
+случае — тесты) на сервере Github при разных событиях (в данном
+случае — коммит). Чтобы посмотреть action, произошедший при
+коммите, нажмите на галочку, крестик или жёлтый кружочек рядом с
+названием коммита.</p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Домашнее-задание-1--основы-синтаксиса"><a class="header" href="#Домашнее-задание-1--основы-синтаксиса">Домашнее задание 1 — <em>основы синтаксиса</em></a></h1>
+<p>Есть <del>два стула</del> две версии условия домашки, которые описывают те же задачи <em>с разных сторон</em>.</p>
+<ul>
+<li><a href="hw/statements/hw-01-crazy.pdf">Версия «трешовая»</a>. Cнабжена трешовым сюжетом — рекомендуется для <del>неадекватных людей</del> желающих погрузиться в задачи сквозь призму богатого воображения автора.</li>
+<li><a href="hw/statements/hw-01-boring.pdf">Версия «скучная»</a>. Без приукрашивания, только строгая формулировка условия — рекомендуется для <del>скучных людей</del> желающих сконцентрироваться на условии.</li>
+</ul>
+<p>Собственно, <a href="https://classroom.github.com/a/S_ghXQf1">задание</a>.</p>
+<p>Оно автоматически создаст репозиторий с тестами. Рекомендуем ознакомиться с <a href="hw/classroom.html">гайдом</a> перед тем, как кликать.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Домашнее-задание-2--алгебраические-типы-данных-и-обработка-ошибок"><a class="header" href="#Домашнее-задание-2--алгебраические-типы-данных-и-обработка-ошибок">Домашнее задание 2 — <em>алгебраические типы данных и обработка ошибок</em></a></h1>
+<p><a href="hw/statements/hw-02.pdf">Условие ДЗ в pdf</a>.</p>
+<p><a href="https://classroom.github.com/a/wIP-AA-V">Задание в Github classroom</a>.</p>
+<p>Переход по ссылке автоматически создаст репозиторий с тестами. Рекомендуем ознакомиться с <a href="hw/classroom.html">гайдом</a> перед тем, как кликать.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Домашнее-задание-3-traitsgenerics"><a class="header" href="#Домашнее-задание-3-traitsgenerics">Домашнее задание 3: <em>Traits&amp;Generics</em></a></h1>
+<p><a href="hw/statements/hw-03.pdf">Условие ДЗ в pdf</a>.</p>
+<p><a href="hw/statements/hw-03-patched.pdf">Пропатченное ДЗ с сюжетом</a>.</p>
+<p><a href="https://classroom.github.com/a/4gXwlmzK">Задание в Github classroom</a>.</p>
+<p>Переход по ссылке автоматически создаст репозиторий с тестами. Рекомендуем ознакомиться с <a href="hw/classroom.html">гайдом</a> перед тем, как кликать.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="raytracer"><a class="header" href="#raytracer">RayTracer</a></h1>
+<p><a href="hw/statements/hw-04.pdf">Условие ДЗ в pdf</a>.</p>
+<p><a href="https://classroom.github.com/a/WJZDmSaN">Задание в Github classroom</a>.</p>
+<div style="break-before: page; page-break-before: always;"></div><p><a href="https://don-rumata.notion.site/Github-CodeSpaces-c86fa452164d43a698a9325a5fc0b165?pvs=4">Инструкция по настройке codespaces</a></p>
+<p><a href="https://classroom.github.com/a/WOIisjVe">Assignment</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
